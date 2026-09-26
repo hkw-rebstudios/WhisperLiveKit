@@ -153,12 +153,19 @@ for _name, _repo in _HUNYUAN_MODELS.items():
 # needed. Source/target are ISO codes (en, it, zh), not full names.
 # prompt_template/prompt_template_xx/lang_names are unused for structured_chat.
 
-MT_MODEL_PROFILES["translategemma-4b-it-4bit"] = MtModelProfile(
-    repo="mlx-community/translategemma-4b-it-4bit",
-    prompt_kind="structured_chat",
-    # TranslateGemma's tokenizer eos_token is <eos>, but the model generates
-    # <end_of_turn> as its turn-end marker. The tokenizer's eos_token_ids does
-    # not include <end_of_turn>, so mlx-lm's stream_generate won't stop on it.
-    # Set it explicitly so the manual EOS check in the backend breaks the loop.
-    eos_token="<end_of_turn>",
-)
+_TRANSLATEGEMMA_MODELS = {
+    "translategemma-4b-it-4bit": "mlx-community/translategemma-4b-it-4bit",
+    "translategemma-12b-it-4bit": "mlx-community/translategemma-12b-it-4bit",
+    "translategemma-12b-it-8bit": "mlx-community/translategemma-12b-it-8bit",
+}
+
+for _name, _repo in _TRANSLATEGEMMA_MODELS.items():
+    MT_MODEL_PROFILES[_name] = MtModelProfile(
+        repo=_repo,
+        prompt_kind="structured_chat",
+        # TranslateGemma's tokenizer eos_token is <eos>, but the model generates
+        # <end_of_turn> as its turn-end marker. The tokenizer's eos_token_ids does
+        # not include <end_of_turn>, so mlx-lm's stream_generate won't stop on it.
+        # Set it explicitly so the manual EOS check in the backend breaks the loop.
+        eos_token="<end_of_turn>",
+    )

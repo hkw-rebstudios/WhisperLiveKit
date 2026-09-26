@@ -887,7 +887,8 @@ def build_parser():
         default="hy-mt2-1.8b-8bit",
         help="Model id for --translation-backend mlx-llm-mt "
         "(default: hy-mt2-1.8b-8bit; also: hy-mt2-1.8b-4bit, hy-mt2-7b-4bit, "
-        "hunyuan-mt-7b-4bit, translategemma-4b-it-4bit).",
+        "hunyuan-mt-7b-4bit, translategemma-4b-it-4bit, "
+        "translategemma-12b-it-4bit, translategemma-12b-it-8bit).",
         dest="mlx_llm_mt_model",
     )
     translation_group.add_argument(
