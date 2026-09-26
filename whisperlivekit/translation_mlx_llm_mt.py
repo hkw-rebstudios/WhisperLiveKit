@@ -5,6 +5,7 @@ import logging
 import re
 import threading
 import time
+from dataclasses import replace
 from collections import deque
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -103,6 +104,7 @@ class MlxLlmTranslation:
         target_language: str = "en",
         source_language: str = "",
         warmup: bool = True,
+        model_path: Optional[str] = None,
     ):
         self._model_id = model_id
         config = MTX_MODEL_CONFIGS.get(model_id)
@@ -112,6 +114,12 @@ class MlxLlmTranslation:
                 f"Unknown mlx-llm-mt model '{model_id}'. "
                 f"Available: {available}"
             )
+        if model_path:
+            # The profile still decides the prompt format and sampling; only
+            # where the weights come from changes. mlx-lm's load() takes a
+            # local directory in place of a repo id, and a pinned revision
+            # would be meaningless for one.
+            config = replace(config, repo=model_path, revision=None)
         self._config = config
         self._target_language = target_language
         self._source_language = source_language

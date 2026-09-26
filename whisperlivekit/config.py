@@ -56,6 +56,9 @@ class WhisperLiveKitConfig:
     translation_backend: str = "nllb"
     alignatt_url: str = "ws://localhost:8765"
     mlx_llm_mt_model: str = "hy-mt2-1.8b-8bit"
+    # Local directory to load the MT weights from, instead of the profile's
+    # Hugging Face repo. For offline and bundled deployments.
+    mlx_llm_mt_model_path: Optional[str] = None
     # Simultaneous-MT variant of mlx-llm-mt: drafts over the unstable ASR tail
     # with the AlignAtt commit policy and a compatible MLX calibration.
     mlx_llm_mt_simultaneous: bool = False

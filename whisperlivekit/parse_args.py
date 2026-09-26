@@ -892,6 +892,16 @@ def build_parser():
         dest="mlx_llm_mt_model",
     )
     translation_group.add_argument(
+        "--mlx-llm-mt-model-path",
+        type=str,
+        default=None,
+        help="Local directory holding the MT weights, used instead of "
+        "downloading --mlx-llm-mt-model from Hugging Face. The prompt format "
+        "and sampling still come from the named profile, so the directory must "
+        "hold that same model. For offline or bundled deployments.",
+        dest="mlx_llm_mt_model_path",
+    )
+    translation_group.add_argument(
         "--simultaneous",
         action="store_true",
         default=False,

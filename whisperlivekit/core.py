@@ -325,6 +325,7 @@ class TranscriptionEngine:
                         model_id=model_id,
                         target_language=config.target_language,
                         source_language=config.lan,
+                        model_path=getattr(config, "mlx_llm_mt_model_path", None),
                     )
             else:
                 if config.backend in {"qwen3-vllm", "qwen3-vllm-metal", "qwen3-streaming"}:
